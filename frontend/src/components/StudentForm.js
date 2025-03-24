@@ -1,25 +1,32 @@
-import { useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
-const StudentForm = ({ fetchStudents }) => {
-    const [name, setName] = useState("");
-    const [course, setCourse] = useState("");
+const StudentForm = ({ addStudent }) => {
+  const [name, setName] = useState("");
+  const [course, setCourse] = useState("");
+  const [message, setMessage] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        await axios.post("http://localhost:5000/api/students", { name, course });
-        setName("");
-        setCourse("");
-        fetchStudents();
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name || !course) {
+      setMessage("Please fill in all fields.");
+      return;
+    }
+    await addStudent(name, course); // Call function from App.js
+    setName("");
+    setCourse("");
+    setMessage("Student added successfully!");
+  };
 
-    return (
-        <form onSubmit={handleSubmit} className="p-3 border rounded">
-            <input className="form-control mb-2" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-            <input className="form-control mb-2" type="text" placeholder="Course" value={course} onChange={(e) => setCourse(e.target.value)} required />
-            <button className="btn btn-primary" type="submit">Add Student</button>
-        </form>
-    );
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Student Name" value={name} onChange={(e) => setName(e.target.value)} />
+        <input type="text" placeholder="Course" value={course} onChange={(e) => setCourse(e.target.value)} />
+        <button type="submit">Add Student</button>
+      </form>
+      <p>{message}</p>
+    </div>
+  );
 };
 
 export default StudentForm;
