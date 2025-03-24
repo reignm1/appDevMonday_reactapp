@@ -35,7 +35,7 @@ const App = () => {
       <StudentForm addStudent={addStudent} />
       <StudentList students={students} />
       <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBHKVX1yWaLXu_DUCEEK99UfknRPELyt4hdg&s"
+          src="https://i.pinimg.com/736x/c5/95/ec/c595ecb33e7f36ee0a18e919c697815a.jpg"
           alt="Online Logo"
           width="300"
           height="300"
